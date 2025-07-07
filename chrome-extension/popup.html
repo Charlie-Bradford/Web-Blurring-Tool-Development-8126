@@ -14,29 +14,29 @@
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #333;
     }
-
+    
     .container {
       padding: 20px;
     }
-
+    
     .header {
       text-align: center;
       margin-bottom: 20px;
       color: white;
     }
-
+    
     .header h1 {
       margin: 0;
       font-size: 24px;
       font-weight: 700;
     }
-
+    
     .header p {
       margin: 5px 0 0 0;
       opacity: 0.9;
       font-size: 14px;
     }
-
+    
     .card {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
@@ -44,19 +44,19 @@
       margin-bottom: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-
+    
     .toggle-section {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 16px;
     }
-
+    
     .toggle-label {
       font-weight: 600;
       font-size: 16px;
     }
-
+    
     .toggle-switch {
       position: relative;
       width: 50px;
@@ -66,11 +66,11 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-
+    
     .toggle-switch.active {
       background: #4CAF50;
     }
-
+    
     .toggle-switch::after {
       content: '';
       position: absolute;
@@ -83,22 +83,22 @@
       transition: transform 0.3s ease;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-
+    
     .toggle-switch.active::after {
       transform: translateX(26px);
     }
-
+    
     .status {
       font-size: 14px;
       color: #666;
       margin-bottom: 16px;
     }
-
+    
     .rules-list {
       max-height: 200px;
       overflow-y: auto;
     }
-
+    
     .rule-item {
       display: flex;
       align-items: center;
@@ -106,21 +106,21 @@
       padding: 8px 0;
       border-bottom: 1px solid #eee;
     }
-
+    
     .rule-item:last-child {
       border-bottom: none;
     }
-
+    
     .rule-name {
       font-weight: 500;
       font-size: 14px;
     }
-
+    
     .rule-domain {
       font-size: 12px;
       color: #666;
     }
-
+    
     .rule-toggle {
       width: 40px;
       height: 20px;
@@ -130,11 +130,11 @@
       transition: background 0.3s ease;
       position: relative;
     }
-
+    
     .rule-toggle.active {
       background: #4CAF50;
     }
-
+    
     .rule-toggle::after {
       content: '';
       position: absolute;
@@ -147,11 +147,11 @@
       transition: transform 0.3s ease;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
-
+    
     .rule-toggle.active::after {
       transform: translateX(20px);
     }
-
+    
     .button {
       width: 100%;
       padding: 12px;
@@ -163,38 +163,48 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.3s ease;
+      margin-bottom: 8px;
     }
-
+    
     .button:hover {
       background: #5a6fd8;
     }
-
+    
     .button.secondary {
       background: #6c757d;
     }
-
+    
     .button.secondary:hover {
       background: #5a6268;
     }
-
+    
     .empty-state {
       text-align: center;
       color: #666;
       font-size: 14px;
       padding: 20px;
     }
-
+    
     .intensity-slider {
       width: 100%;
       margin: 10px 0;
     }
-
+    
     .slider-label {
       display: flex;
       justify-content: space-between;
       font-size: 12px;
       color: #666;
       margin-bottom: 5px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .button-group .button {
+      flex: 1;
     }
   </style>
 </head>
@@ -204,7 +214,7 @@
       <h1>🛡️ WebBlur</h1>
       <p>Privacy Protection Tool</p>
     </div>
-
+    
     <div class="card">
       <div class="toggle-section">
         <span class="toggle-label">Blur Protection</span>
@@ -212,7 +222,7 @@
       </div>
       <div class="status" id="statusText">Checking current page...</div>
     </div>
-
+    
     <div class="card">
       <h3 style="margin: 0 0 12px 0; font-size: 16px;">Blur Intensity</h3>
       <div class="slider-label">
@@ -221,17 +231,21 @@
       </div>
       <input type="range" class="intensity-slider" id="intensitySlider" min="1" max="5" value="3">
     </div>
-
+    
     <div class="card">
       <h3 style="margin: 0 0 12px 0; font-size: 16px;">Active Rules</h3>
       <div class="rules-list" id="rulesList">
         <div class="empty-state">No rules found for this page</div>
       </div>
     </div>
-
-    <button class="button" id="openManager">Open Rule Manager</button>
+    
+    <button class="button" id="selectElements">Select Elements to Blur</button>
+    
+    <div class="button-group">
+      <button class="button secondary" id="openManager">Manage Rules</button>
+      <button class="button secondary" id="openSettings">Settings</button>
+    </div>
   </div>
-
   <script src="popup.js"></script>
 </body>
 </html>

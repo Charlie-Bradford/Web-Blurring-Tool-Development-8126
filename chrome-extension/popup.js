@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const rulesList = document.getElementById('rulesList');
   const intensitySlider = document.getElementById('intensitySlider');
   const openManagerBtn = document.getElementById('openManager');
+  const selectElementsBtn = document.getElementById('selectElements');
+  const openSettingsBtn = document.getElementById('openSettings');
 
   let currentTab = null;
   let currentDomain = null;
@@ -37,12 +39,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   mainToggle.addEventListener('click', toggleBlur);
   intensitySlider.addEventListener('input', updateIntensity);
   openManagerBtn.addEventListener('click', openRuleManager);
+  selectElementsBtn.addEventListener('click', startElementSelection);
+  openSettingsBtn.addEventListener('click', openSettings);
 
   function updateToggleState() {
     mainToggle.classList.toggle('active', blurEnabled);
-    statusText.textContent = blurEnabled ? 
-      `Blur protection is ON for ${currentDomain || 'this page'}` : 
-      'Blur protection is OFF';
+    statusText.textContent = blurEnabled 
+      ? `Blur protection is ON for ${currentDomain || 'this page'}`
+      : 'Blur protection is OFF';
   }
 
   function updateIntensitySlider() {
@@ -53,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     blurEnabled = !blurEnabled;
     await chrome.storage.sync.set({ blurEnabled });
     updateToggleState();
-    
+
     // Send message to content script
     if (currentTab?.id) {
       chrome.tabs.sendMessage(currentTab.id, {
@@ -66,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   async function updateIntensity() {
     blurIntensity = parseInt(intensitySlider.value);
     await chrome.storage.sync.set({ blurIntensity });
-    
+
     // Send message to content script
     if (currentTab?.id) {
       chrome.tabs.sendMessage(currentTab.id, {
@@ -103,8 +107,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="rule-name">${rule.name}</div>
           <div class="rule-domain">${rule.domain}</div>
         </div>
-        <div class="rule-toggle ${rule.enabled !== false ? 'active' : ''}" 
-             data-rule-id="${rule.id}"></div>
+        <div class="rule-toggle ${rule.enabled !== false ? 'active' : ''}" data-rule-id="${rule.id}"></div>
       </div>
     `).join('');
 
@@ -134,7 +137,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  function startElementSelection() {
+    if (currentTab?.id) {
+      chrome.tabs.sendMessage(currentTab.id, { action: 'startElementSelection' });
+      window.close(); // Close popup to see the page fully
+    }
+  }
+
   function openRuleManager() {
     chrome.tabs.create({ url: chrome.runtime.getURL('manager.html') });
+  }
+  
+  function openSettings() {
+    chrome.tabs.create({ url: chrome.runtime.getURL('settings.html') });
   }
 });

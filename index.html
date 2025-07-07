@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/blur-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="frame-src *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <title>WebBlur - Privacy Protection Tool</title>
+    <style>
+      .blur-overlay {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 8px;
+        z-index: 9999;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+      
+      .blur-highlight {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+        cursor: pointer;
+      }
+      
+      .blur-selection-mode {
+        cursor: crosshair !important;
+      }
+      
+      .floating-control-panel {
+        z-index: 999999;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

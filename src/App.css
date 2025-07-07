@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Element Selection Styles */
+.blur-selection-mode {
+  cursor: crosshair !important;
+}
+
+.blur-selection-mode * {
+  cursor: crosshair !important;
+}
+
+.blur-highlight {
+  outline: 3px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+  background: rgba(59, 130, 246, 0.1) !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+  z-index: 9999 !important;
+}
+
+.blur-selected {
+  outline: 3px solid #10b981 !important;
+  outline-offset: 2px !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.blur-overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  z-index: 9999;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.floating-control-panel {
+  z-index: 999999 !important;
+}
+
+.floating-control-panel * {
+  pointer-events: auto !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .floating-control-panel {
+    width: calc(100% - 40px) !important;
+    right: 20px;
+    left: 20px;
+  }
+}

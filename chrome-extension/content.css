@@ -1,0 +1,36 @@
+/* WebBlur Content Styles */
+.webblur-highlight {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+  background: rgba(59, 130, 246, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.webblur-selector-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(59, 130, 246, 0.05) !important;
+  z-index: 999999 !important;
+  cursor: crosshair !important;
+  pointer-events: auto !important;
+}
+
+.webblur-selection-mode {
+  cursor: crosshair !important;
+}
+
+.webblur-selection-mode * {
+  cursor: crosshair !important;
+}
+
+/* Blur transition effects */
+[data-webblur-element] {
+  transition: filter 0.3s ease !important;
+}
+
+[data-webblur-element]:hover {
+  filter: blur(2px) !important;
+}
